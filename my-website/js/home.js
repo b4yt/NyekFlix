@@ -53,13 +53,11 @@ const API_KEY = '4a4bcfc615b0b8a79d5afda76b797668';
   changeServer();
   const modal = document.getElementById('modal');
   modal.classList.add('show');
-  modal.style.display = 'flex';
 }
 
 function closeModal() {
   const modal = document.getElementById('modal');
   modal.classList.remove('show');
-  modal.style.display = 'none';
   document.getElementById('modal-video').src = '';
 }
 
