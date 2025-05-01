@@ -109,6 +109,28 @@ body {
 }
 
 /* Modal */
+.modal {
+  display: none;
+  position: fixed; /* Make it float on top */
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.8); /* Dark background */
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  transition: opacity 0.3s ease;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.modal.show {
+  display: flex;
+  opacity: 1;
+  pointer-events: auto;
+}
+
 .modal-body {
   display: flex;
   flex-direction: row;
