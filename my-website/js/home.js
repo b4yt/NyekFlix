@@ -31,17 +31,18 @@ const API_KEY = '4a4bcfc615b0b8a79d5afda76b797668';
       document.getElementById('banner-title').textContent = item.title || item.name;
     }
 
-    function displayList(items, containerId) {
-      const container = document.getElementById(containerId);
-      container.innerHTML = '';
-      items.forEach(item => {
+    function displayList(items, containerId, type) {
+        const container = document.getElementById(containerId);
+        container.innerHTML = '';
+        items.forEach(item => {
+        item.media_type = type; // <- Fix to ensure server switching works
         const img = document.createElement('img');
         img.src = `${IMG_URL}${item.poster_path}`;
         img.alt = item.title || item.name;
         img.onclick = () => showDetails(item);
         container.appendChild(img);
-      });
-    }
+  });
+}
 
     function showDetails(item) {
       currentItem = item;
@@ -110,14 +111,15 @@ const API_KEY = '4a4bcfc615b0b8a79d5afda76b797668';
     }
 
     async function init() {
-      const movies = await fetchTrending('movie');
-      const tvShows = await fetchTrending('tv');
-      const anime = await fetchTrendingAnime();
+  const movies = await fetchTrending('movie');
+  const tvShows = await fetchTrending('tv');
+  const anime = await fetchTrendingAnime();
 
-      displayBanner(movies[Math.floor(Math.random() * movies.length)]);
-      displayList(movies, 'movies-list');
-      displayList(tvShows, 'tvshows-list');
-      displayList(anime, 'anime-list');
-    }
+  displayBanner(movies[Math.floor(Math.random() * movies.length)]);
+  displayList(movies, 'movies-list', 'movie');
+  displayList(tvShows, 'tvshows-list', 'tv');
+  displayList(anime, 'anime-list', 'tv'); // anime are TV shows
+}
+
 
     init();
